@@ -133,7 +133,6 @@ function customGeneration(low, upp, num, spe, len) {
 	let letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
 	if (low) {
-		
 		password = randomizeString(letters, len);
 	}
 
@@ -143,11 +142,16 @@ function customGeneration(low, upp, num, spe, len) {
 		}else{
 			for (let i=0; len-i>0; i+=20){
 				upp_pos = randomNumber(password.length);
-				password = password.slice(0, upp_pos) + letters[randomNumber(letters.length-1)].toUpperCase() + password.slice(upp_pos+1);
+				if (upp_pos == password.length){
+					password = password.slice(0, upp_pos-1) + letters[randomNumber(letters.length-1)].toUpperCase();
+				}else{
+					password = password.slice(0, upp_pos) + letters[randomNumber(letters.length-1)].toUpperCase() + password.slice(upp_pos+1);
+				}
+				
 			}
 		}
 	}
-
+	
 	if (num) {
 		let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 		if (password == "") {
@@ -155,7 +159,12 @@ function customGeneration(low, upp, num, spe, len) {
 		}else{
 			for (let i=0; len-i>0; i+=20){
 				upp_pos = randomNumber(password.length);
-				password = password.slice(0, upp_pos) + numbers[randomNumber(numbers.length-1)] + password.slice(upp_pos+1);
+				if (upp_pos == password.length){
+					password = password.slice(0, upp_pos-1) + numbers[randomNumber(numbers.length-1)];
+				}else{
+					password = password.slice(0, upp_pos) + numbers[randomNumber(numbers.length-1)] + password.slice(upp_pos+1);
+				}
+				
 			}
 		}
 
@@ -168,7 +177,11 @@ function customGeneration(low, upp, num, spe, len) {
 		}else{
 			for (let i=-20; len-i>0; i+=20){
 				upp_pos = randomNumber(password.length);
-				password = password.slice(0, upp_pos) + special[randomNumber(special.length-1)] + password.slice(upp_pos+1);
+				if (upp_pos == password.length){
+					password = password.slice(0, upp_pos-1) + special[randomNumber(special.length-1)];
+				}else{
+					password = password.slice(0, upp_pos) + special[randomNumber(special.length-1)] + password.slice(upp_pos+1);
+				}
 			}
 		}
 	}
